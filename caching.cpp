@@ -15,10 +15,10 @@ void fillWithRandomData(vector<dataElement> &buffer) {
   for (long i = 0; i < buffer.size(); i++) {
     buffer[i].temperature =
         static_cast<float>(rand()) / static_cast<float>(RAND_MAX / 30.0);
-  }
 
-  // TODO: ggf. so ergänzen, dass Ihre für den Cache optimierte Datenstruktur
-  // gefüllt wird.
+    // for optimized variant, store temperature data in separate array
+    temperature[i] = buffer[i].temperature;
+  }
 
   cout << "Done. " << endl;
 }
@@ -28,10 +28,7 @@ void calculateAverageTemp(vector<dataElement> &buffer, bool optimized) {
 
   for (long i = 0; i < NR_RECORDS; i++) {
     if (optimized) {
-      // TODO: HIER optimieren
-      // Ersetzen Sie die nachfolgende Zeile so, dass der Cache besser genutzt
-      // wird.
-      sum += buffer[i].temperature;
+      sum += temperature[i];
     } else
       sum += buffer[i].temperature;
   }
